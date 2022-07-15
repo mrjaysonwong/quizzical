@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500&display=swap');
+
+:root {
+  --bg: rgb(2, 0, 36);
+  --bg-linear-gradient: linear-gradient(
+    52deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(7, 42, 128, 1) 0%,
+    rgba(24, 107, 124, 1) 100%
+  );
+  --purple: #9886db;
+  --bg-color-correct: #94D7A2;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Karla';
+}
+
+main {
+  background: var(--bg);
+  background: var(--bg-linear-gradient);
+}
+
+.init-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 0 10px;
+  color: #fff;
+  background: var(--bg);
+  background: var(--bg-linear-gradient);
+}
+
+.init-container--width {
+  width: 80%;
+}
+
+.title {
+  margin: 0;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn-start {
+  border: none;
+  padding: 16px;
+  width: 160px;
+  border-radius: 13px;
+  background-color: #1b8a6e;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.btn-start:active,
+.btn-check:active {
+  box-shadow: inset 3px 5px 3px #002c21;
+}
+
+.title-description {
+  letter-spacing: 1px;
+  line-height: 1.3rem;
+}
+
+.data-container {
+  min-height: 100vh;
+  max-width: 70%;
+  margin: auto;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-check, .btn-play-again {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  background-color: #1b8a6e;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.score {
+  text-align: center;
+  color: #fff;
+}
+
+/* Question Component */
+.question {
+  color: #fff;
+  padding: 20px 0;
+  border-bottom: 1px solid rgb(136, 136, 136);
+}
+
+.question__list {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+/* Answer Component */
+.answers {
+  display: flex;
+}
+
+.btn-answer {
+  color: #fff;
+  font-size: 12px;
+  padding: 10px;
+  margin: 20px 20px 0px 0px;
+  border-radius: 12px;
+  background-color: transparent;
+  border: 1px solid var(--purple);
+  min-width: 50px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 540px) {
+  .init-container--width {
+    width: 100%;
+  }
+
+  .data-container {
+    width: 80%;
+  }
+
+  /* Question Component */
+
+
+  /* Answer Component */
+  .answers {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  .btn-answer {
+    padding: 15px;
+    margin: 10px 0;
+    width: 190px;
+  }
+}
