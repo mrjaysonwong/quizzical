@@ -152,7 +152,7 @@ export default function App() {
           <div className="init-container--width">
             <h1 className="title">Quizzical</h1>
             <p className="title-description">
-              This app is a knowledge quiz app. It asks questions about general
+              This app is a knowledge quiz app. It asks questions about computer
               informations and you just have to pick you answers from the
               options provided. It uses its data from Open Trivia Database - an
               open source database
