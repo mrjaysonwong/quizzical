@@ -154,7 +154,7 @@ export default function App() {
               This is a knowledge quiz app. It asks questions about computer
               informations and you just have to pick you answers from the
               options provided. It uses its data from Open Trivia Database - an
-              open source database
+              open source database.
             </p>
             <button className="btn btn-start" onClick={startQuiz}>
               Start quiz
