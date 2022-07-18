@@ -10,7 +10,6 @@ export default function App() {
   const [isFetched, setIsFetched] = useState(false);
 
   useEffect(() => {
-    console.log('effect ran');
     fetchData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
