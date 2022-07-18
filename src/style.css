@@ -9,7 +9,7 @@
     rgba(24, 107, 124, 1) 100%
   );
   --purple: #9886db;
-  --bg-color-correct: #94D7A2;
+  --bg-color-correct: #94d7a2;
 }
 
 *,
@@ -89,7 +89,8 @@ main {
   justify-content: center;
 }
 
-.btn-check, .btn-play-again {
+.btn-check,
+.btn-play-again {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,7 +149,6 @@ main {
   }
 
   /* Question Component */
-
 
   /* Answer Component */
   .answers {
