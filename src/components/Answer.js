@@ -12,7 +12,9 @@ export default function Answer(props) {
       };
     } else if (props.isHeld) {
       styles = {
-        backgroundColor: props.isHeld ? 'var(--purple)' : 'var(--bg-color-correct)',
+        backgroundColor: props.isHeld
+          ? 'var(--purple)'
+          : 'var(--bg-color-correct)',
         color: '#000',
         border: props.isHeld ? '1px solid var(--purple)' : 'none',
       };
