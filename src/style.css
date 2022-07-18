@@ -64,11 +64,14 @@ main {
   background-color: #1b8a6e;
   color: #fff;
   font-size: 1.3rem;
+  box-shadow: 0 6px #666;
 }
 
 .btn-start:active,
-.btn-check:active {
-  box-shadow: inset 3px 5px 3px #002c21;
+.btn-check:active,
+.btn-play-again:active {
+  transform: translateY(4px);
+  box-shadow: 0 3px #666;
 }
 
 .title-description {
@@ -98,6 +101,7 @@ main {
   border: none;
   border-radius: 12px;
   color: #fff;
+  box-shadow: 0 6px #666;
 }
 
 .score {

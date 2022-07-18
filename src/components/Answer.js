@@ -14,7 +14,7 @@ export default function Answer(props) {
       styles = {
         backgroundColor: props.isHeld ? 'var(--purple)' : 'var(--bg-color-correct)',
         color: '#000',
-        border: props.isHeld ? '1px solid var(--purple)' : 'null',
+        border: props.isHeld ? '1px solid var(--purple)' : 'none',
       };
     }
   } else {

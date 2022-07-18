@@ -145,6 +145,8 @@ export default function App() {
       );
     });
 
+  console.log(questionsArray);
+
   return (
     <main>
       {!start ? (
@@ -177,7 +179,7 @@ export default function App() {
           ) : (
             <div className='score'>
               <p>
-                You scored {handleScore()}/{questionsArray.length}{" "} correct answers.
+                You scored {handleScore()}/{questionsArray.length} correct answers.
               </p>
               <button 
               className='btn btn-play-again'
