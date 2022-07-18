@@ -145,8 +145,6 @@ export default function App() {
       );
     });
 
-  console.log(questionsArray);
-
   return (
     <main>
       {!start ? (
