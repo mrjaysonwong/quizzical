@@ -1,12 +1,11 @@
 import React from 'react';
 import { unEscape } from '../Utillity';
-import Answer from './Answer'
+import Answer from './Answer';
 
 export default function Question(props) {
-  
   const answersElements = props.answers.map((item) => {
     return (
-      <Answer 
+      <Answer
         key={item.id}
         isHeld={item.isHeld}
         isCorrect={item.isCorrect}
@@ -14,8 +13,8 @@ export default function Question(props) {
         isChecked={props.isChecked}
         handleClick={() => props.handleClick(item.id, props.id)}
       />
-    )
-  })
+    );
+  });
 
   return (
     <div className="question">

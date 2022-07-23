@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Question from './components/Question';
+import Settings from './components/Settings';
 import { nanoid } from 'nanoid';
 
 export default function App() {
@@ -8,26 +9,39 @@ export default function App() {
   const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState(false);
   const [isFetched, setIsFetched] = useState(false);
+  const [settingsArray, setSettingsArray] = useState([]);
+  const [categoryId, setCategoryId] = useState(9);
 
   useEffect(() => {
     fetchData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [] && [categoryId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function fetchData() {
-    const url =
-      'https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple';
+    const urls = [
+      `${`https://opentdb.com/api.php?amount=5&category=${categoryId}&difficulty=easy&type=multiple`}`,
+      'https://opentdb.com/api_category.php',
+    ];
 
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`This is an HTTP error: the status is ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => createObjArray(data.results))
-      .then((objsArray) => {
+    Promise.all(
+      urls.map((url) =>
+        fetch(url).then((res) => {
+          if (!res.ok) {
+            throw new Error(
+              `This is an HTTP error: the status is ${res.status}`
+            );
+          }
+          return res.json();
+        })
+      )
+    )
+      .then((data) => {
+        const data1 = data[0].results;
+        const data2 = data[1].trivia_categories;
+
+        const finalData = createObjArray(data1);
         setError(null);
-        setQuestionsArray(objsArray);
+        setQuestionsArray(finalData);
+        setSettingsArray(data2);
         setIsChecked(false);
       })
       .catch((err) => {
@@ -39,15 +53,17 @@ export default function App() {
   }
 
   if (error) {
-    <div>
-      <p>{error}</p>
-    </div>
+    return (
+      <div>
+        <p>{error}</p>
+      </div>
+    );
   }
 
-  function createObjArray(arrayAPI) {
+  function createObjArray(data1) {
     return (
-      arrayAPI &&
-      arrayAPI.map((item) => {
+      data1 &&
+      data1.map((item) => {
         // Adding id to the existing objects (elements of the fetched array)
         return {
           ...item,
@@ -91,20 +107,22 @@ export default function App() {
     !isChecked &&
       setQuestionsArray((prevArray) => {
         return prevArray.map((question) => {
-          return question.id === questionId ?
-          {
-            ...question,
-            answers: question.answers.map((answer) => {
-              return answer.id === answerId ?
-              {...answer, isHeld: true} : {...answer, isHeld: false}
-            })
-          } : question;
+          return question.id === questionId
+            ? {
+                ...question,
+                answers: question.answers.map((answer) => {
+                  return answer.id === answerId
+                    ? { ...answer, isHeld: true }
+                    : { ...answer, isHeld: false };
+                }),
+              }
+            : question;
         });
       });
   }
 
   function checkAnswer() {
-    setIsChecked(true)
+    setIsChecked(true);
   }
 
   function handleScore() {
@@ -129,6 +147,20 @@ export default function App() {
     setStart(true);
   }
 
+  function renderCategoryList() {
+    return (
+      settingsArray &&
+      settingsArray.map((item) => ({
+        id: item.id,
+        value: item.name,
+      }))
+    );
+  }
+
+  function handleCategory(id) {
+    setCategoryId(id);
+  }
+
   const questionsElements =
     questionsArray &&
     questionsArray.map((item) => {
@@ -151,11 +183,14 @@ export default function App() {
           <div className="init-container--width">
             <h1 className="title">Quizzical</h1>
             <p className="title-description">
-              This is a knowledge quiz app. It asks questions about computer
-              informations and you just have to pick you answers from the
-              options provided. It uses its data from Open Trivia Database - an
-              open source database
+              This is a knowledge quiz app. Pick your answers from the options
+              provided. It uses its data from Open Trivia Database - an open
+              source database
             </p>
+            <Settings
+              options={renderCategoryList()}
+              handleCategory={handleCategory}
+            />
             <button className="btn btn-start" onClick={startQuiz}>
               Start quiz
             </button>
@@ -166,27 +201,21 @@ export default function App() {
           <div>{questionsArray && questionsElements}</div>
           {!isChecked ? (
             isFetched && (
-              <button 
-              className='btn btn-check'
-              onClick={checkAnswer}
-              >
+              <button className="btn btn-check" onClick={checkAnswer}>
                 Check answers
               </button>
             )
           ) : (
-            <div className='score'>
+            <div className="score">
               <p>
-                You scored {handleScore()}/{questionsArray.length} correct answers.
+                You scored {handleScore()}/{questionsArray.length} correct
+                answers.
               </p>
-              <button 
-              className='btn btn-play-again'
-              onClick={playAgain}
-              >
+              <button className="btn btn-play-again" onClick={playAgain}>
                 Play again
               </button>
             </div>
-          )
-          }
+          )}
         </div>
       )}
     </main>
